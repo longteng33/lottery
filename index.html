@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>转盘抽奖</title>
+    <link rel="stylesheet" href= "index.css">
+</head>
+<body>
+    <table id="table">
+        <tr>
+            <td class="select">1<img src="img/张三.jpg"></td>
+            <td>2<img src="img/李四.jpg"></td>
+            <td>3<img src="img/张三.jpg"></td>
+            <td>4<img src="img/王五.jpg"></td>
+            <td>5<img src="img/赵六.jpg"></td>
+        </tr>
+        <tr>
+            <td>16<img src="img/王五.jpg"></td>
+            <td><img src="img/一等奖.jpg"></td>
+            <td><img src="img/二等奖.jpg"></td>
+            <td><img src="img/二等奖.jpg"></td>
+            <td>6<img src="img/李四.jpg"></td>
+        </tr>
+        <tr>
+            <td>15<img src="img/赵六.jpg"></td>
+            <td><img src="img/二等奖.jpg"></td>
+            <td class="start">开始</td>
+            <td><img src="img/二等奖.jpg"></td>
+            <td>7<img src="img/王五.jpg"></td>
+        </tr>
+        <tr>
+            <td>14<img src="img/李四.jpg"></td>
+            <td><img src="img/二等奖.jpg"></td>
+            <td><img src="img/二等奖.jpg"></td>
+            <td><img src="img/二等奖.jpg"></td>
+            <td>8<img src="img/王五.jpg"></td>
+        </tr>
+        <tr>
+            <td>13<img src="img/王五.jpg"></td>
+            <td>12<img src="img/李四.jpg"></td>
+            <td>11<img src="img/张三.jpg"></td>
+            <td>10<img src="img/赵六.jpg"></td>
+            <td>9<img src="img/李四.jpg"></td>
+        </tr>
+    </table>
+    <script>
+    var tdList=document.getElementById("table").getElementsByTagName("td");
+    
+    var tdID=0;
+    var tdAry=[0,1,2,3,4,9,14,19,24,23,22,21,20,15,10,5];
+    var jpAry=[6,7,8,11,13,16,17,18];
+    var runNum;
+    var dNum;
+    var clickNum=-1;
+
+    function playFunc(){
+        tdList[tdAry[tdID]].className="";
+        
+        if(tdID<tdAry.length-1){
+            tdID++;
+        }else{
+            tdID=0;
+        }
+
+        // tdID=tdID+1>=tdAry.length?0:tdID+1;
+
+        tdList[tdAry[tdID]].className="select";
+        runNum++;
+        if(runNum>0){
+            start.onclick="";
+        }
+
+        if(runNum==6){
+            clearInterval(run);
+            // 第一次清除上一个run，然后将新的计时器赋予run
+            run=setInterval(playFunc,20);
+        }
+
+        if(runNum+dNum==maxNum){
+            // 最后的倒数几步是随机数
+            clearInterval(run);
+            // 第二次清除上一个run，然后将新的计时器赋予run
+            run=setInterval(playFunc,200);
+        }
+        
+        if(runNum==maxNum+1){
+            start.onclick=playStart;
+            clearInterval(run);
+            // 第三次清除上一个run，然后将.persom、.jp授予相应的td
+            tdList[tdAry[tdID]].className="person";
+            tdList[jpAry[clickNum]].className="jp";
+            // 重新关联事件
+            return;
+        }
+    
+    } 
+   
+    //函数playFunc的函数体里面有playFunc
+
+    var start=document.getElementsByClassName("start")[0];
+    start.onclick=playStart;
+    function playStart(){
+        runNum=0;
+        //每次单击事件后，计数器都清零
+        maxNum=16*3+parseInt(Math.random()*16);
+        dNum=Math.floor(Math.random()*16);
+        run=setInterval(playFunc,200);
+        // 取消关联事件
+        start.onclick="";
+       clickNum++;   
+        
+    }
+
+    function playB(){
+        console.log("点我没用的"+clickNum)   
+        
+    }
+
+    
+    
+ </script>
+</body>
+</html>

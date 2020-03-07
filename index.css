@@ -1,0 +1,27 @@
+td{
+    background-color: #666;
+    width: 150px;
+    height: 100px;
+    font-size: 50px;
+    text-align: center;
+}
+.select{
+    background-color: #ff6600;
+}
+.start{
+    background-color: #f60;
+    cursor: pointer;
+}
+#table img{
+    width:150px;
+    display: none;
+}
+#table .jp img{
+    display: table;
+}
+#table .person img{
+    display: table;
+}
+#table .person{
+    font-size: 0;
+}
